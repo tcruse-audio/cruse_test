@@ -57,25 +57,33 @@
 
 <audio id="beeSound" src="squeak.mp3" preload="auto"></audio>
 
-    <script>
-        const bee = document.getElementById('beeImage');
-        const sound = document.getElementById('beeSound');
-        const counter = document.getElementById('squeakCount');
-        let count = 0;
+<script>
+    const bee = document.getElementById('beeImage');
+    const sound = document.getElementById('beeSound');
+    const counterDisplay = document.getElementById('squeakCount');
+    
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    let count = 0;
 
-        bee.addEventListener('click', function() {
-            count++;
-            counter.textContent = count;
+    bee.addEventListener('click', function() {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
 
-            bee.classList.add('wiggle');
-            setTimeout(() => bee.classList.remove('wiggle'), 200);
+        count++;
+        counterDisplay.textContent = count;
 
-            // Attempt to play with a "fallback" log
-            sound.currentTime = 0;
-            sound.play().catch(error => {
-                console.error("Playback failed. Is the file in the right folder?", error);
-            });
+        sound.currentTime = 0;
+        sound.play().catch(function(error) {
+            console.log("Audio Error: " + error.message);
         });
+
+        bee.classList.add('wiggle');
+        setTimeout(function() {
+            bee.classList.remove('wiggle');
+        }, 200);
+    });
 </script>
 
 </body>
