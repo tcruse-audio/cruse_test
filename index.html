@@ -55,29 +55,27 @@
 
 <img id="beeImage" src="https://pngimg.com/uploads/bee/bee_PNG74690.png" alt="transparent png of a bee" style="display: block; margin-left: auto; margin-right: auto; width: 50%; cursor: pointer;">
 
-<audio id="beeSound" src="Squeaky Toy Sound Effect.mp3"></audio>
+<audio id="beeSound" src="Squeaky Toy Sound Effect.mp3" preload="auto"></audio>
 
-<script>
-    const bee = document.getElementById('beeImage');
-    const sound = document.getElementById('beeSound');
-    const counterDisplay = document.getElementById('squeakCount');
-    
-    let count = 0;
+    <script>
+        const bee = document.getElementById('beeImage');
+        const sound = document.getElementById('beeSound');
+        const counter = document.getElementById('squeakCount');
+        let count = 0;
 
-    bee.addEventListener('click', function() {
-        count++;
-        counterDisplay.textContent = count;
+        bee.addEventListener('click', function() {
+            count++;
+            counter.textContent = count;
 
-        sound.currentTime = 0;
-        sound.play().catch(function(error) {
-            console.log("Audio failed. Check if the file name matches exactly!");
+            bee.classList.add('wiggle');
+            setTimeout(() => bee.classList.remove('wiggle'), 200);
+
+            // Attempt to play with a "fallback" log
+            sound.currentTime = 0;
+            sound.play().catch(error => {
+                console.error("Playback failed. Is the file in the right folder?", error);
+            });
         });
-        
-        bee.classList.add('wiggle');
-        setTimeout(function() {
-            bee.classList.remove('wiggle');
-        }, 200);
-    });
 </script>
 
 </body>
