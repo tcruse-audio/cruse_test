@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bee Page</title>
+<title>Bee Squish</title>
+<style>
+        @keyframes wiggle {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .squeak-animation {
+            animation: wiggle 0.2s ease-in-out;
+        }
+
+        #beeImage {
+            width: 300px; 
+            cursor: pointer; 
+            transition: transform 0.1s;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,5 +51,24 @@ bee appreciation post
 
 <img src="https://pngimg.com/uploads/bee/bee_PNG74690.png" alt="transparent png of a bee" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
 
+<audio id="beeSound" src="http://googleusercontent.com/file_content/0"></audio>
+
+    <script>
+        const bee = document.getElementById('beeImage');
+        const sound = document.getElementById('beeSound');
+
+        bee.addEventListener('click', function() {
+            sound.currentTime = 0; 
+            sound.play();
+
+            bee.classList.add('squeak-animation');
+
+            setTimeout(() => {
+                bee.classList.remove('squeak-animation');
+            }, 200);
+        });
+    </script>
+    
 </body>
 </html>
+
