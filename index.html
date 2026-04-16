@@ -3,26 +3,19 @@
 <head>
 <title>Bee Squish</title>
 <style>
-        @keyframes wiggle {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            50% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-            100% { transform: rotate(0deg); }
-        }
-
-        .squeak-animation {
-            animation: wiggle 0.2s ease-in-out;
-        }
-
-        #beeImage {
-            width: 300px; 
-            cursor: pointer; 
-            transition: transform 0.1s;
-        }
-    </style>
+  
+    .wiggle {
+        animation: shake 0.2s;
+    }
+    @keyframes shake {
+        0% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(0.9) rotate(5deg); }
+        100% { transform: scale(1) rotate(0deg); }
+    }
+</style>
 </head>
-<body>
+
+<body style="background-color: rgb(255,238,140);">
 
 <div style="text-align: center;">
 
@@ -46,29 +39,29 @@ margin-top: -175px">
 bee appreciation post
 </p>
 
-<body style="background-color: rgb(255,238,140);">
+</div>
 
+<img id="beeImage" src="https://pngimg.com/uploads/bee/bee_PNG74690.png" alt="transparent png of a bee" style="display: block; margin-left: auto; margin-right: auto; width: 50%; cursor: pointer;">
 
-<img src="https://pngimg.com/uploads/bee/bee_PNG74690.png" alt="transparent png of a bee" style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<audio id="beeSound" src="Squeaky Toy Sound Effect.mp3"></audio>
 
-<audio id="beeSound" src="http://googleusercontent.com/file_content/0"></audio>
+<script>
+    const bee = document.getElementById('beeImage');
+    const sound = document.getElementById('beeSound');
 
-    <script>
-        const bee = document.getElementById('beeImage');
-        const sound = document.getElementById('beeSound');
-
-        bee.addEventListener('click', function() {
-            sound.currentTime = 0; 
-            sound.play();
-
-            bee.classList.add('squeak-animation');
-
-            setTimeout(() => {
-                bee.classList.remove('squeak-animation');
-            }, 200);
+    bee.addEventListener('click', function() {
+        sound.currentTime = 0;
+        sound.play().catch(function(error) {
+            console.log("Audio file not found. Check the filename!");
         });
-    </script>
-    
+
+        bee.classList.add('wiggle');
+
+        setTimeout(function() {
+            bee.classList.remove('wiggle');
+        }, 200);
+    });
+</script>
+
 </body>
 </html>
-
