@@ -15,48 +15,65 @@
 </style>
 </head>
 
-<body style="background-color: rgb(255,238,140);">
+<body style="background-color: rgb(255,238,140); font-family: sans-serif;">
 
 <div style="text-align: center;">
 
-<h1 style="color:rgb(255,238,140);
-background-color:black;
-font-size:300%;
-display: inline-block; 
-padding: 0px 20px;
-margin-bottom: 10px"
->
-bee &#9829;
-</h1>
+    <h1 style="color:rgb(255,238,140);
+    background-color:black;
+    font-size:300%;
+    border-radius: 5px;
+    display: inline-block; 
+    padding: 0px 20px;
+    margin-bottom: 10px">
+    bee &#9829;
+    </h1>
 
-<div style="text-align: center;">
+    <div style="text-align: center;">
+        <p style ="color:white;
+        font-weight: bold;
+        background-color:black;
+        display: inline-block; 
+        padding: 5px 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;">
+        bee appreciation post
+        </p>
+    </div>
 
-<p style ="color:white;
-background-color:black;
-display: inline-block; 
-padding: 5px 5px;
-margin-top: -175px">
-click the bee
-</p>
+    <div style="text-align: center;">
+        <p style="background-color: black; 
+        color: white; display: inline-block; 
+        padding: 5px 10px; 
+        font-weight: bold; 
+        border-radius: 5px;">
+            squishes: <span id="squeakCount">0</span>
+        </p>
+    </div>
 
 </div>
 
 <img id="beeImage" src="https://pngimg.com/uploads/bee/bee_PNG74690.png" alt="transparent png of a bee" style="display: block; margin-left: auto; margin-right: auto; width: 50%; cursor: pointer;">
 
-<audio id="beeSound" src="https://www.soundjay.com/misc/sounds/toy-squeak-1.mp3"></audio>
+<audio id="beeSound" src="Squeaky Toy Sound Effect.mp3"></audio>
 
 <script>
     const bee = document.getElementById('beeImage');
     const sound = document.getElementById('beeSound');
+    const counterDisplay = document.getElementById('squeakCount');
+    
+    let count = 0;
 
     bee.addEventListener('click', function() {
+        count++;
+        counterDisplay.textContent = count;
+
         sound.currentTime = 0;
         sound.play().catch(function(error) {
-            console.log("Audio file not found. Check the filename!");
+            console.log("Audio failed. Check if the file name matches exactly!");
         });
-
+        
         bee.classList.add('wiggle');
-
         setTimeout(function() {
             bee.classList.remove('wiggle');
         }, 200);
