@@ -37,7 +37,7 @@
         padding: 5px 5px;
         margin-bottom: 5px;
         border-radius: 5px;">
-        click the bee
+        click the bee !
         </p>
     </div>
 
@@ -74,9 +74,9 @@
         count++;
         counterDisplay.textContent = count;
 
-        sound.currentTime = 0;
+        sound.currentTime = 0; 
         sound.play().catch(function(error) {
-            console.log("Audio Error: " + error.message);
+            console.log("Playback error: " + error.message);
         });
 
         bee.classList.add('wiggle');
@@ -85,6 +85,5 @@
         }, 200);
     });
 </script>
-
 </body>
 </html>
